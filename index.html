@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa Vivo · Ica y La Libertad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="map"></div>
+  <div class="shade"></div>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="live"></span>
+      <strong>MAPA VIVO</strong>
+      <span id="scope" class="scope">Ica · La Libertad · últimas 24 horas</span>
+    </div>
+    <div class="clock">
+      <span id="clock" class="clock-time">--:--</span>
+      <span id="today" class="clock-date"></span>
+    </div>
+  </header>
+
+  <div id="paused" class="paused" hidden>⏸ En pausa · Espacio para continuar</div>
+
+  <!-- Resumen (vista general entre vueltas) -->
+  <section id="overview" class="overview">
+    <div class="ov-kicker">Últimas 24 horas</div>
+    <div class="ov-stats">
+      <div><b id="ovTotal">0</b><span>noticias</span></div>
+      <div><b id="ovAlto">0</b><span>relevancia alta</span></div>
+      <div><b id="ovInc">0</b><span>incidentes</span></div>
+    </div>
+    <div id="ovDeps" class="ov-deps"></div>
+  </section>
+
+  <!-- Noticia actual -->
+  <article id="card" class="card">
+    <div id="place" class="place"></div>
+    <h1 id="headline" class="headline"></h1>
+    <div class="card-row">
+      <img id="cardImg" class="card-img" alt="" referrerpolicy="no-referrer" hidden>
+      <div class="card-body">
+        <div class="card-meta">
+          <span id="cardCat" class="chip"></span>
+          <span id="cardRel" class="chip chip-ghost"></span>
+          <span id="cardTipo" class="chip chip-ghost"></span>
+          <span class="src">Fuente: <b id="cardSrc"></b></span>
+          <span id="cardTime" class="time"></span>
+        </div>
+      </div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </article>
+
+  <!-- Panel lateral -->
+  <aside class="panel">
+    <header class="p-head">
+      <div class="p-title"><span class="live"></span>Noticias en vivo</div>
+
+      <div class="hero">
+        <div class="hero-num"><b id="heroTotal" data-v="0">0</b><span>noticias en 24 horas</span></div>
+        <div class="tiles">
+          <div class="tile">
+            <span class="tile-ico alta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.8 3.2 4.5 4.8 4.5 9a4.5 4.5 0 0 1-9 0c0-1.7.9-2.9 1.8-3.9.8-.9 1.3-2.2 2.7-5.1z"/></svg></span>
+            <div><b id="tAlto" data-v="0">0</b><span>relevancia alta</span></div>
+          </div>
+          <div class="tile">
+            <span class="tile-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5"/><path d="M12 16v.2"/></svg></span>
+            <div><b id="tInc" data-v="0">0</b><span>incidentes</span></div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="spark-fig">
+        <figcaption><span>Actividad por hora</span><span id="pico"></span></figcaption>
+        <div id="spark" class="spark" role="img" aria-label="Noticias por hora en las últimas 24 horas"></div>
+        <div class="spark-axis"><span>hace 24 h</span><span>hace 12 h</span><span>ahora</span></div>
+      </figure>
+
+      <div id="mix" class="mix" role="img" aria-label="Reparto de noticias por categoría"></div>
+      <ul id="legend" class="legend"></ul>
+    </header>
+
+    <ol id="list" class="list"></ol>
+
+    <footer class="panel-foot">
+      <span id="updated"></span>
+      <span class="keys"><kbd>Espacio</kbd> pausa · <kbd>←</kbd><kbd>→</kbd> navegar · <kbd>F</kbd> pantalla completa</span>
+    </footer>
+  </aside>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="data/noticias.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
